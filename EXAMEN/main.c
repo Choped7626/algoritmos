@@ -12,9 +12,9 @@
 /*
 ALGORITMOS EXAMEN
 
-NOMBRE: Mario Lamas Angeriz	LOGIN: m.lamasa@udc.es
+NOMBRE:
 
-GRUPO : 3.2	
+GRUPO :
 
 FECHA : 18/01/2024
 */
