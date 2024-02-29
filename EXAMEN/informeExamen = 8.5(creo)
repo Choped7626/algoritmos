@@ -1,0 +1,155 @@
+ALGORITMOS EXAMEN
+
+NOMBRE:
+
+GRUPO :
+
+FECHA : 18/01/2024
+
+******************************************************************************
+
+INTRODUCCIÓN:
+
+    En este ejercicio requerido en el examen trabajamos con un algortimo de ordenación que se aplica sobre un vector. Usando el código obtendrémos la demostración empírica de la complejidad computacional del algoritmo en cuestión , con vectores iniciales ordenados descendentemente , ascendentemente y de forma aleatoria. El algoritmo ordena los valores de menor a mayor.
+
+    Se comprueba el correcto funcionamiento del algoritmo con la función test , con vectores ordenados descendentemente , ascendentemente y de forma aleatoria de tamaño 15
+
+    Para la realización de la comprobación empírica de la complejidad computacional del algoritmo de ordenacion hemos medido los tiempos de ejecución con vectores aleatorios , con vectores ordenados ascendentemente y con vectores ordenados descendentemente.
+    
+    El dispositivo usado para realizar las mediciones es:
+	Sistema: Linux Mint x86_64
+	Kernel: 5.15.0-84-generic
+	Procesador: 12th Gen Intel Core i7-12700H x 14
+
+******************************************************************************
+
+TEST:
+
+        En la función test realizamos la comprobacion del correcto funcionamiento de auxOrd usando vectores conocidos y imprimiendo el resultado esperado seguido de el resultado de aplicar la función correspondiente al vector.
+
+    Vector aleatorio
+    12 -15 15 6 -15 -10 8 -7 -9 10 -8 10 3 -15 -4 
+    Vector ordenado
+    -15 -15 -15 -10 -9 -8 -7 -4 3 6 8 10 10 12 15 
+
+    Vector Ascendente
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 
+    Vector ordenado
+    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 
+
+    Vector Descendente
+    15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 
+    Vector ordenado
+    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+
+
+
+******************************************************************************
+
+MEDICIÓN DE TIEMPOS DE EJECUCIÓN:
+
+	En cuanto a la medición de tiempos de ejecucción, hay que resaltar varios aspectos antes:
+	-La unidad de tiempo empleada son los nanosegundos(μs).
+	-t(n) significa tiempo de que tarda en ejecutar el algoritmo de ordenacion para un vector de tamaño n.
+	-Se sigue una progresion geométrica de razón 2, empezando en n = 500.
+	-Se indicará con (*) los tiempos medidos menores que 500 μs, entonces lo pasamos a un bucle que lo repite 1000 veces y hallamos la media resultante.
+    -Se indicará con # a la derecha del todo de una medición cuando esta sea considerada anómala y por tanto no se tendrá en cuenta a la hora de valorar la complejidad computacional del algoritmo.
+
+******************************************************************************
+
+TIEMPOS DE EJECUCIÓN ALGORITMO DE auxOrd:
+
+1.-VECTOR ASCENDENTE:
+
+Vector Ascendente
+                      n                t(n)          t(n)/n^1.8          t(n)/n^2.0          t(n)/n^2.1
+(*)                 500         30.79400000          0.00042689          0.00012318          0.00006617     #
+(*)                1000        108.86800000          0.00043341          0.00010887          0.00005456
+(*)                2000        429.55600000          0.00049110          0.00010739          0.00005022
+                   4000       1669.00000000          0.00054796          0.00010431          0.00004551
+                   8000       6561.00000000          0.00061860          0.00010252          0.00004173
+                  16000      26472.00000000          0.00071676          0.00010341          0.00003928
+                  32000     106329.00000000          0.00082676          0.00010384          0.00003680
+                  64000     427127.00000000          0.00095375          0.00010428          0.00003448
+
+LEYENDA:
+
+-COTA SUBESTIMADA: n^1.8  
+-COTA ESTIMADA: O(n^2.0)
+-COTA SOBRESTIMADA: n^2.1
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 500
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n^1.8 es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^2.1 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n^2.0) los valores de la sucesión se mantienen entorno a 0,000104
+
+2.-VECTOR DESCENDENTE:
+
+
+Vector Descendente
+                      n                t(n)        t(n)/nlog(n)          t(n)/n^2.0          t(n)/n^2.2
+(*)                 500         68.38800000          0.02200879          0.00027355          0.00007893
+(*)                1000        263.55000000          0.03815277          0.00026355          0.00006620
+                   2000       1835.00000000          0.12070935          0.00045875          0.00010032     #
+                   4000       3735.00000000          0.11258071          0.00023344          0.00004444
+                   8000      14698.00000000          0.20442971          0.00022966          0.00003806
+                  16000      72024.00000000          0.46501447          0.00028134          0.00004059
+                  32000     250825.00000000          0.75560687          0.00024495          0.00003076
+                  64000     974532.00000000          1.37594290          0.00023792          0.00002601
+
+
+LEYENDA:
+
+-COTA SUBESTIMADA: nlog(n)
+-COTA ESTIMADA: O(n^2.0)
+-COTA SOBRESTIMADA: n^2.2
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 2000
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada nlog(n) es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^2.2 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n^2.0) los valores de la sucesión se mantienen entorno a 0,000252
+
+3.-VECTOR ALEATORIO:
+
+Vector Aleatorio
+                      n                t(n)              t(n)/n        t(n)/nlog(n)          t(n)/n^1.5
+(*)                 500         32.54600000          0.06509200          0.01047403          0.00291100     #
+(*)                1000         60.49200000          0.06049200          0.00875711          0.00191293
+(*)                2000        130.32300000          0.06516150          0.00857286          0.00145706
+(*)                4000        278.37900000          0.06959475          0.00839093          0.00110039
+                   8000        650.00000000          0.08125000          0.00904064          0.00090840
+                  16000       1242.00000000          0.07762500          0.00801883          0.00061368
+                  32000       2691.00000000          0.08409375          0.00810660          0.00047010
+                  64000       4705.00000000          0.07351563          0.00664300          0.00029060     #
+
+LEYENDA:
+
+-COTA SUBESTIMADA: n
+-COTA ESTIMADA: O(n*log(n))
+-COTA SOBRESTIMADA: n^1.5
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 500 y n = 64000
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^1.5 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n*log(n)) los valores de la sucesión se mantienen entorno a 0,00848
+
+******************************************************************************
+
+CONCLUSIÓN FINAL:
+
+    Analizado el algoritmo de ordenación auxOrd podemos sacar las siguientes conclusiones respecto a su complejidad:
+        
+    -El algoritmo utilizado es más eficiente si se parte de un vector aleatorio que si lo hacemos de uno ya ordenado , esto se puede ver claramente gracias a las cotas estimadas donde para el vector aleatorio es de O(nlog(n)) y para los demás de O(n^2).
+    -Podríamos decir que este algoritmo compite en eficiencia para el caso de vector aleatorio con el de ordenación por montículos , aunque debido a sus otras complejidades dependiendo de la entrada está claro que usar el de ordenación por montículos es mas seguro si no queremos encontrarnos con tiempos de ordenación demasiado largos para ciertos casos.
