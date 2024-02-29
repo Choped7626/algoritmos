@@ -1,0 +1,113 @@
+ALGORITMOS PRÁCTICA 4
+
+NOMBRE:
+
+NOMBRE:
+	
+GRUPO :
+
+FECHA : 22/11/2023
+
+******************************************************************************
+
+INTRODUCCIÓN:
+
+    En la práctica 4 trabajaremos con grafos , concretamente aplicaremos el algoritmo que calcula el camino mínimo de cada vértice a los restantes en grafos ponderados siguiendo
+el algoritmo de dijkstra.
+
+        Una vez implementado el algoritmo y comprobado su correcto funcionamiento mediante el uso de las funciones test , procedemos a realizar la comprobación empirica de la complejidad computacional del algoritmo sobre grafos completos no dirigidos generados aleatoriamente usando las funciones proporcionadas en el enunciado.
+    
+    El dispositivo usado para realizar las mediciones es:
+    Sistema: Darwin MacBook Air , macOS 11.2.3
+	Kernel: Darwin Kernel Version 20.3.0
+	Procesador: Apple M1 x 8
+
+******************************************************************************
+
+TEST:
+
+    El las funciones de test comprobamos el correcto funcionamiento del algoritmo usando matrices de adyacencia conocidas y sus respectivas distancias minimas conocidas, aplicando así el algoritmo a las matrices de adyacencia y comprobando que la matriz de distancias mínimas es la esperada.
+    Siendo el resultado de los tests los siguientes:
+
+        FIGURA 2
+    MATRIZ DE ADYACENCIA
+     0  1  8  4  7 
+     1  0  2  6  5 
+     8  2  0  9  5 
+     4  6  9  0  3 
+     7  5  5  3  0 
+    MATRIZ DE DISTANCIA MINIMA
+     0  1  3  4  6 
+     1  0  2  5  5 
+     3  2  0  7  5 
+     4  5  7  0  3 
+     6  5  5  3  0 
+
+        FIGURA 3
+    MATRIZ DE ADYACENCIA
+     0  1  4  7 
+     1  0  2  8 
+     4  2  0  3 
+     7  8  3  0 
+    MATRIZ DE DISTANCIA MINIMA
+     0  1  3  6 
+     1  0  2  5 
+     3  2  0  3 
+     6  5  3  0 
+    
+    Contrastando las matrices de distancia mínima con las proporcionadas en el enunciado podemos asegurar que el algoritmo funciona correctamente.
+
+
+******************************************************************************
+
+MEDICIÓN DE TIEMPOS DE EJECUCIÓN:
+
+	En cuanto a la medición de tiempos de ejecucción, hay que resaltar varios aspectos antes:
+	-La unidad de tiempo empleada son los nanosegundos(μs).
+	-t(n) significa tiempo de que tarda en ejecutar el algoritmo para una matriz de tamaño n * n.
+	-Se sigue una progresion geométrica de razón 2, empezando en n = 8.
+	-Se indicará con (*) los tiempos medidos menores que 500 μs, entonces lo pasamos a un bucle que lo repite 5000 veces y hallamos la media resultante.
+    -Se indicará con # a la derecha del todo de una medición cuando esta sea considerada anómala y por tanto no se tendrá en cuenta a la hora de valorar la complejidad computacional del algoritmo.
+
+******************************************************************************
+
+TIEMPOS DE EJECUCIÓN DEL ALGORITMO:
+
+MATRIZ DE ADYACENCIA ALEATORIA:    
+ 
+Medicion de tiempos
+                   n                t(n)          t(n)/n^2.5         t(n)/n^2.87          t(n)/n^3.5
+(*)                   1          0.07940000          0.07940000          0.07940000          0.07940000     #
+(*)                   2          0.09960000          0.01760696          0.01362396          0.00880348
+(*)                   4          0.71780000          0.02243125          0.01343047          0.00560781
+(*)                   8          9.88980000          0.05463394          0.02531158          0.00682924     #
+(*)                  16         41.68300000          0.04070605          0.01459267          0.00254413
+(*)                  32        286.34920000          0.04943346          0.01371247          0.00154480
+                     64       2142.00000000          0.06536865          0.01403082          0.00102139
+                    128      14619.00000000          0.07886653          0.01309861          0.00061614
+                    256     109622.00000000          0.10454369          0.01343535          0.00040837
+                    512     945310.00000000          0.15936735          0.01584782          0.00031126     #
+                   1024    8062969.00000000          0.24029520          0.01848988          0.00023466     #
+LEYENDA:
+
+-COTA SUBESTIMADA: n^2.5
+-COTA ESTIMADA: O(n^2.87)
+-COTA SOBRESTIMADA: n^3.5
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 1 , n = 8 , n = 512 y n = 1024
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^3.5 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n^2.87) los valores de la sucesión se mantienen entorno a 0,0137
+
+******************************************************************************
+
+CONCLUSIÓN FINAL:
+
+    Analizado el algoritmo implementado podemos sacar las siguientes conclusiones respecto a su complejidad:
+        
+    -La complejidad computacional del algoritmo implementado aplicado sobre matrices de adyacencia generadas aleatoriamente es de O(n^2.87).
+    -Podemos observar que los tiempos de ejecución crecen rápidamente al incrementar el tamaño de la matriz , es conveniente señalar que al usar un n = 1024 , realmente el número de datos que el algoritmo procesa es 1.048.576 , por lo que es lógico que para relativamente pequeños valores de n el tiempo de ejecución sea considerable.
