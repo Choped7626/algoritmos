@@ -1,0 +1,299 @@
+ERRORES
+
+FALLOS EN EL CÓDIGO ENTREGADO: en la función mediciones se hacen operaciones redundantes:
+
+/*
+    ta = microsegundos();
+    elegir(v , Ordenacion , n);
+    (j % 2 == 0) ? ord_ins(v , n) : ord_shell(v , n);
+    td = microsegundos();
+*/
+
+Sacar elegir de la medicion de tiempos , asi luego no hay q restarlo
+
+Usar la notación O() para la cota subestimada y sobrestimada
+Mejor marcar los datos anómalos en el informe con #
+No son tiempos por lo q "los valores de los tiempos" es incorrecto , se debe usar "los valores de la sucesión"
+En las conclusiones añadir comparación de los algoritmos consigo mismos
+
+********************************************************************************************************************************************************************************************************
+TÍTULO: ALGORITMOS PRÁCTICA 2
+
+NOMBRE:
+
+NOMBRE:
+	
+GRUPO :
+
+FECHA : 19/10/2023
+
+********************************************************************************************************************************************************************************************************
+
+INTRODUCCIÓN:
+
+	En esta práctica 2 analizaremos de dos algoritmos de ordenación, shell y por inserción, para realizar la verificación empírica de su complejidad. Estos algoritmos realizan una ordenación (de menor a mayor número) de un vector de n elementos.
+
+	En el test, comprobaremos su correcto funcionamiento a través de vectores generados con valores aleatorios y también vectores inicializados con valores establecidos.
+
+	Una vez pasado el test, nos dispondremos a realizar la medición de tiempos de ejecución para los siguientes casos: vectores aleatorios, vectores de valores aleatorios ascendentes(el mejor caso) y descendentes (el peor caso). Es decir, sacaremos un total de 6 tablas, 3 por cada algoritmo de ordenación. Para esta medición, usaremos una progresión geométrica de razón dos. El dispositivo con el que realizamos la medición es el siguiente:
+
+DISPOSITIVO DE PRUEBAS:
+	Sistema: Linux Mint x86_64
+	Kernel: 5.15.0-84-generic
+	Procesador: 12th Gen Intel Core i7-12700H x 14
+
+********************************************************************************************************************************************************************************************************
+
+TEST:
+
+	En el test proporcionado en nuestro código, realizamos la comprobación de los algoritmos de ordenación en varios casos (los mismos para cada algoritmo): ordenación de un vector de valores aleatorios, ordenación de un vector de valores ordenados ascendentemente (teoricamente el mejor caso) y la ordenación de un vector de valores ordenados descendentemente (el peor caso).
+
+	El resultado de la ejecución del test es la esperada y es la siguiente:
+	
+	
+SHELL
+[ 0  14  15  19  -5  -12  -1  9  -9  15  -17  -19  9  13  0  -12  -14  4  -11  -6 ]
+Vector no ordenado
+[ -19  -17  -14  -12  -12  -11  -9  -6  -5  -1  0  0  4  9  9  13  14  15  15  19 ]
+Vector ordenado
+
+INSERCION
+[ -15  -16  4  -11  15  -4  3  -10  -16  -16  14  4  20  10  4  -4  18  -16  -16  -10 ]
+Vector no ordenado
+[ -16  -16  -16  -16  -16  -15  -11  -10  -10  -4  -4  3  4  4  4  10  14  15  18  20 ]
+Vector ordenado
+
+SHELL
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+
+INSERCION
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+
+SHELL
+[ 19  18  17  16  15  14  13  12  11  10  9  8  7  6  5  4  3  2  1  0 ]
+Vector no ordenado
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+
+INSERCION
+[ 19  18  17  16  15  14  13  12  11  10  9  8  7  6  5  4  3  2  1  0 ]
+Vector no ordenado
+[ 0  1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19 ]
+Vector ordenado
+
+********************************************************************************************************************************************************************************************************
+
+MEDICIÓN DE TIEMPOS DE EJECUCIÓN:
+
+	En cuanto a la medición de tiempos de ejecucción, hay que resaltar varios aspectos antes:
+	-La unidad de tiempo empleada son los nanosegundos(μs).
+	-t(n) significa tiempo de que tarda en ejecutar el algoritmo de ordenacion para un vector de tamaño n.
+	-Se sigue una progresion geométrica de razón 2, empezando en n = 500.
+	-Se indicará con (*) los tiempos medidos menores que 500 μs, entonces lo pasamos a un bucle que lo repite 1000 veces y hallamos la media resultante.
+	
+	
+TIEMPOS DE EJECUCIÓN ALGORITMO DE ORDENACIÓN POR INSERCIÓN:
+
+1º PARA UN VECTOR ALEATORIO:
+	
+Vector Aleatorio Insercion
+                   n                t(n)          t(n)/n^1.8            t(n)/n^2          t(n)/n^2.1
+(*)                 500         67.10100000          0.00093021          0.00026840          0.00014418
+(*)                1000        231.88400000          0.00092315          0.00023188          0.00011622
+                   2000       1358.00000000          0.00155255          0.00033950          0.00015876
+                   4000       3860.00000000          0.00126730          0.00024125          0.00010526
+                   8000      14858.00000000          0.00140087          0.00023216          0.00009451
+                  16000      57567.00000000          0.00155868          0.00022487          0.00008541
+                  32000     230311.00000000          0.00179079          0.00022491          0.00007971
+                  64000     918324.00000000          0.00205056          0.00022420          0.00007413
+                  
+LEYENDA:
+
+-COTA ESTIMADA: O(n^2)
+-COTA SUBESTIMADA: n^1.8
+-COTA SOBRESTIMADA: n^2.1
+
+DATOS ANÓMALOS:
+
+	Para la cota cota estimada, en los casos para n = 500, 2000, 4000, podemos observar que tenemos datos atípicos.
+
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de la sucesión van aumentando según crece el tamaño del vector.
+-Para la cota estimada, quitando esos datos anómalos, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000224
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+
+
+2º PARA UN VECTOR DESCENDENTE (el peor caso):
+	
+Vector Descendente Insercion
+                   n                t(n)          t(n)/n^1.8            t(n)/n^2          t(n)/n^2.1
+(*)                 500        119.44400000          0.00165584          0.00047778          0.00025664
+(*)                1000        468.44500000          0.00186491          0.00046845          0.00023478
+                   2000       1881.00000000          0.00215048          0.00047025          0.00021990
+                   4000       7427.00000000          0.00243840          0.00046419          0.00020253
+                   8000      30358.00000000          0.00286227          0.00047434          0.00019310
+                  16000     123591.00000000          0.00334635          0.00048278          0.00018337
+                  32000     477880.00000000          0.00371577          0.00046668          0.00016539
+                  64000    1917688.00000000          0.00428207          0.00046819          0.00015481
+
+LEYENDA:
+
+-COTA ESTIMADA: O(n^2)
+-COTA SUBESTIMADA: n^1.8
+-COTA SOBRESTIMADA: n^2.1
+
+DATOS ANÓMALOS:
+
+	Para la cota cota estimada, en el caso para n = 16000, podemos observar que tenemos datos atípicos.
+	
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de tiempo van aumentando según crece el tamaño del vector.
+-Para la cota estimada, quitando ese dato anómalo, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000469
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+
+3º PARA UN VECTOR ASCENDENTE (el mejor caso):
+
+Vector Ascendente Insercion
+                   n                t(n)          t(n)/n^0.8              t(n)/n          t(n)/n^1.2
+(*)                 500          0.58800000          0.00407569          0.00117600          0.00033932
+(*)                1000          0.91240000          0.00363233          0.00091240          0.00022918
+(*)                2000          3.13240000          0.00716231          0.00156620          0.00034248
+(*)                4000          6.75280000          0.00886821          0.00168820          0.00032137
+(*)                8000         13.19120000          0.00994975          0.00164890          0.00027326
+(*)               16000         25.75440000          0.01115721          0.00160965          0.00023222
+(*)               32000         50.59860000          0.01258979          0.00158121          0.00019859
+(*)               64000        102.18320000          0.01460278          0.00159661          0.00017457
+
+LEYENDA:
+
+-COTA ESTIMADA: O(n)
+-COTA SUBESTIMADA: n^0.8
+-COTA SOBRESTIMADA: n^1.2
+
+DATOS ANÓMALOS:
+
+	Para la cota subestima, en n = 1000, podemos observar que el tiempo disminuyen cuando tiene que crecer.
+	Para la cota estimada, en el caso para n = 500, 1000, los tiempos son demasiados menores con respecto al resto.
+	Para la cota sobrestimada, para n = 1000, el tiempo disminuye demasiado rápido con respecto al resto.
+	
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de tiempo van aumentando según crece el tamaño del vector, quitando ese dato anómalo.
+-Para la cota estimada, quitando eses datos anómalos, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000160
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+
+TIEMPOS DE EJECUCIÓN ALGORITMO DE ORDENACIÓN SHELL:
+
+1º PARA UN VECTOR ALEATORIO:
+
+Vector Aleatorio Shell
+                   n                t(n)              t(n)/n          t(n)/n^1.2          t(n)/n^1.3
+(*)                 500         35.44000000          0.03807384          0.02045171          0.01098583
+(*)                1000         80.69000000          0.04044080          0.02026841          0.01015827
+(*)                2000        181.53900000          0.04244602          0.01984879          0.00928177
+(*)                4000        411.40800000          0.04487524          0.01957946          0.00854269
+                   8000        887.00000000          0.04513616          0.01837450          0.00748009
+                  16000       2164.00000000          0.05137186          0.01951252          0.00741142
+                  32000       4962.00000000          0.05495305          0.01947497          0.00690179
+                  64000      10559.00000000          0.05455378          0.01803877          0.00596470
+                 128000      26099.00000000          0.06290612          0.01940760          0.00598757
+                 256000      57015.00000000          0.06410991          0.01845445          0.00531223
+                 
+LEYENDA:
+
+-COTA ESTIMADA: O(n^1.2)
+-COTA SUBESTIMADA: n
+-COTA SOBRESTIMADA: n^1.3
+
+DATOS ANÓMALOS:
+
+	Para la cota cota estimada, en los casos para n = 500, 1000, podemos observar que tenemos datos atípicos.
+	
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de tiempo van aumentando según crece el tamaño del vector.
+-Para la cota estimada, quitando eses datos anómalos, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000190
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+                 
+2º PARA UN VECTOR DESCENDENTE (el peor caso):
+
+Vector Descendente Shell
+                   n                t(n)              t(n)/n       t(n)/n*log(n)          t(n)/n^1.3
+(*)                 500         11.32200000          0.02264400          0.00364367          0.00350964
+(*)                1000         23.10300000          0.02310300          0.00334450          0.00290850
+(*)                2000         52.37800000          0.02618900          0.00344551          0.00267800
+(*)                4000        113.41500000          0.02835375          0.00341857          0.00235501
+(*)                8000        245.48200000          0.03068525          0.00341433          0.00207015
+                  16000        515.00000000          0.03218750          0.00332504          0.00176381
+                  32000       1237.00000000          0.03865625          0.00372645          0.00172058
+                  64000       2507.00000000          0.03917188          0.00353964          0.00141619
+                 128000       5623.00000000          0.04392969          0.00373559          0.00129002
+                 256000      10624.00000000          0.04150000          0.00333255          0.00098987
+                 
+
+LEYENDA:
+
+-COTA ESTIMADA: O(nlog(n))
+-COTA SUBESTIMADA: n
+-COTA SOBRESTIMADA: n^1.3
+
+DATOS ANÓMALOS:
+
+	Para la cota cota estimada, en los casos para n = 500, 32000, 64000, 128000, podemos observar que tenemos datos atípicos.
+	
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de tiempo van aumentando según crece el tamaño del vector.
+-Para la cota estimada, quitando eses datos anómalos, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000337
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+
+3º PARA UN VECTOR ASCENDENTE (el mejor caso):
+Vector Ascendente Shell
+                   n                t(n)              t(n)/n           t(n)/n/*log(n)          t(n)/n^1.3
+(*)                 500          7.39200000          0.01478400          0.00237891          0.00229140
+(*)                1000         15.96260000          0.01596260          0.00231082          0.00200957
+(*)                2000         35.50600000          0.01775300          0.00233564          0.00181536
+(*)                4000         78.77160000          0.01969290          0.00237434          0.00163565
+(*)                8000        172.06300000          0.02150787          0.00239317          0.00145101
+(*)               16000        371.54540000          0.02322159          0.00239884          0.00127249
+                  32000        787.00000000          0.02459375          0.00237083          0.00109466
+                  64000       1812.00000000          0.02831250          0.00255836          0.00102359
+                 128000       3521.00000000          0.02750781          0.00233914          0.00080778
+                 256000       7805.00000000          0.03048828          0.00244828          0.00072721
+                 
+LEYENDA:
+
+-COTA ESTIMADA: O(nlog(n))
+-COTA SUBESTIMADA: n
+-COTA SOBRESTIMADA: n^1.3
+
+Para este caso en concreto, para los tiempos menores de 500 nanosegundos, el bucle para calcular el tiempo medio, se realiza 5000 veces en vez de 1000-
+
+DATOS ANÓMALOS:
+
+	Para la cota cota estimada, en los casos para n = 64000, podemos observar que tenemos datos atípicos.
+	
+CONCLUSIONES:
+-Para la cota subestimada, se puede observar que los valores de tiempo van aumentando según crece el tamaño del vector.
+-Para la cota estimada, quitando ese dato anómalo, podemos aprecir que los tiempos se mantienen constantes en torno a 0.000236
+-Para la cota sobrestimada, los tiempos disminuyen según aumenta el vector de tamaño.
+
+********************************************************************************************************************************************************************************************************
+
+CONCLUSIÓN FINAL:
+
+	Analizados ambos algoritmos podemos sacar las siguientes conclusiones respecto su COMPLEJIDAD:	
+	
+	-Para los vectores aleatorios: El algoritmo de ordenación por inserción es de complejidad O(n^2), mientras que el algoritmo shell
+es de O(n^1.2) (Un valor levemente mayor que nlog(n)). Por lo tanto, para este caso es mejor el algoritmo shell.
+
+	-Para los vectores ordenados descendentemente (peor caso), la complejidad del algoritmo de ordenación por inserción sigue siendo O(n^2), mientras
+que el algoritmo shell es O(nlog(n)). Así que, nuevamente, el algoritmo shell es mejor en este caso.
+
+	-Para los vectores ordenados ascendentemente (mejor caso), la complejidad del algoritmo de ordenación por inserción es O(n) y para el algoritmo shell
+es O(nlog(n)). Entonces, en este caso, es mejor el algoritmo de ordenación por inserción.
+
+Finalmente, podemos concluir que el algoritmo shell es más eficiente para el peor caso y el caso medio, pero para un vector ya ordenado, el otro algoritmo es más rápido.
