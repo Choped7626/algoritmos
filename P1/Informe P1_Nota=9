@@ -1,0 +1,147 @@
+*******************************************************************************************************
+TÍTULO: ALGORITMOS PRÁCTICA 1
+
+NOMBRE:
+
+NOMBRE: 
+	
+GRUPO :
+
+FECHA : 27/09/2023
+
+*****************************************INTRODUCCIÓN*************************************************
+
+Dispositivo de pruebas:
+	Sistema: Linux Mint x86_64
+	Kernel: 5.15.0-84-generic
+	Procesador: 12th Gen Intel Core i7-12700H x 14
+	
+En esta practica 1 analizamos la implementacion de dos algoritmos que dan, como resultado, la mayor
+suma consecutiva de una serie de números.
+
+Con el primer test y con un array de números conocido, comprobamos la eficiencia de los algoritmos y
+verificamos que la salida era la deseada.
+
+	Resultado del primer test:
+	
+	[ -9  2  -5  -4  6 ]
+		1: 6  2:  6
+	[ 4  0  9  2  5 ]
+		1: 20  2:  20
+	[ -2  -1  -9  -7  -1 ]
+		1: 0  2:  0
+	[ 9  -2  1  -7  -8 ]
+		1: 9  2:  9
+	[ 15  -2  -5  -4  16 ]
+		1: 20  2:  20
+	[ 7  -5  6  7  -7 ]
+		1: 15  2:  15
+		
+
+A diferencia del primer test, con el segundo se realizó la ejecución de una serie de vectores de
+números aleatorios.
+
+	Resultado del segundo test:	
+	
+	test2
+                                     sumaSubMax1    sumaSubMax2
+[ 1  5  1  -3  -4 ]
+                                               7              7
+[ -1  -5  1  -2  -4 ]
+                                               1              1
+[ 3  2  0  -2  2 ]
+                                               5              5
+[ -1  4  5  -3  -5 ]
+                                               9              9
+[ 5  3  0  -5  -1 ]
+                                               8              8
+                                               
+Una vez realizada la comprobacion del funcionamiento de los algoritmos, concluimos que ambos funcionan
+correctamente y nos disponemos a hacer mediciones de tiempo.
+
+DATOS A TENER EN CUENTA:
+
+Para las mediciones se utilizan vectores de números de tamaño n, que siguen una progresion geometrica
+de orden 2, siendo n inicialmente igual a 500 y finalmente, 32000 para el primer algoritmo (debido
+a su menor efectividad) y 2560000 para el segundo algorimo.
+
+El (*) situado a la izquierda de determinados valores numéricos significan que su tiempo de ejecución 
+es inferior a 500μs (micro segundos). En este caso lo pasamos a un bucle que lo repite 1000 veces (k = 1000) y hallamos la media resultante.
+
+IMPORTANTE: Todas las mediciones de tiempo están en micro segundos (μs).
+
+t(n) significa tiempo de que tarda en ejecutar la suma de la subsecuencia máxima de números del vector.
+
+****************************************************************************************************************************************************************************************************
+AVISO: Los resultados extraídos son los más homogéneos de una muestra de 50 ejecuciones (tanto para SumaSubMax1 como para SumaSubMax2).
+
+
+TIEMPOS DE EJECUCIÓN DE SumaSubMax1:
+SumaSubMax 1
+                                   n                             t(n)                       t(n)/n^1.6                         t(n)/n^2                       t(n)/n^2.2
+(*)                              500                       169.707000                         0.008154                         0.000679                         0.000196
+                                1000                       658.000000                         0.010429                         0.000658                         0.000165
+                                2000                      2633.000000                         0.013766                         0.000658                         0.000144
+                                4000                     11334.000000                         0.019547                         0.000708                         0.000135
+                                8000                     43469.000000                         0.024731                         0.000679                         0.000113
+                               16000                    173452.000000                         0.032553                         0.000678                         0.000098
+                               32000                    683882.000000                         0.042339                         0.000668                         0.000084
+
+                            
+Leyenda:
+
+-Cota subestimada = n^1.6
+-Cota estimada = n^2
+-Cota sobrestimada = n^2.2
+
+t(n) = O(n^2)
+
+
+CONCLUSIONES:
+
+Tras la ejecucion, podemos observar que la cota subestimada crece considerablemente a medida que los
+vectores de numeros aumentan de tamaño. En el caso de la cota estimada (n^2), es aparente, a simple
+vista, que los valores permanecen constantes en torno a 0.00067 μs (C = 0.00067 μs) (a excepcion de cuando n = 4000, 
+que esta en torno a 0.0007 μs). Finalmente, en n ^ 2.2, es evidente que los tiempos de ejecucion van 
+disminuyendo cada vez que aumenta n.
+
+
+TIEMPOS DE EJECUCIÓN DE SumaSubMax2:
+
+SumaSubMax 2
+                                   n                             t(n)                       t(n)/n^0.5                           t(n)/n                     t(n)/nlog(n)
+(*)                              500                         0.989000                         0.044229                         0.001978                         0.000318
+(*)                             1000                         3.251000                         0.102806                         0.003251                         0.000471
+(*)                             2000                         5.120000                         0.114487                         0.002560                         0.000337
+(*)                             4000                        12.024000                         0.190116                         0.003006                         0.000362
+(*)                             8000                        20.470000                         0.228862                         0.002559                         0.000285
+(*)                            16000                        34.743000                         0.274668                         0.002171                         0.000224
+(*)                            32000                        59.664000                         0.333532                         0.001865                         0.000180
+(*)                            64000                       107.661000                         0.425567                         0.001682                         0.000152
+(*)                           128000                       214.155000                         0.598581                         0.001673                         0.000142
+(*)                           256000                       427.204000                         0.844336                         0.001669                         0.000134
+
+Leyenda:
+
+-Cota subestimada = n^0.5
+-Cota estimada = n
+-Cota sobrestimada = nlog(n)
+
+t(n) = O(n)
+
+CONCLUSIONES: 
+
+Tras la ejecucion, podemos observar que la cota subestimada crece notablemente según van creciendo
+los vectores de números. En la cota estima, quitando ciertas excepciones (sobre todo en n = ), podemos concluir que tiene 
+un tiempo constante en torno a 0.0016 μs (C = 0.0016 μs). Para la cota sobrestimada, podemos ver que (a excepcion de n = 1000) los tiempos
+van disminuyendo a medida que aumenta n.
+
+*********************************************************************************************************************************
+
+CONCLUSIÓN FINAL:
+
+Tras las ejecuciones realizadas sobre ambos algoritmos y respectivas mediciones de tiempo, hemos comprobado empíricamente su
+complejidad computacional. En el caso del primer algoritmo, los resultados apuntan a que su complejidad computacional es de n^2. 
+En caso del segundo, la cota ajustada muestra que su complejidad computacional es de n. Teniendo en cuenta también los tiempos
+ de ejecución para las distintas n, podemos observar claramente como el primer algoritmo es mucho menos eficiente que el 
+ segundo, siendo este muy rápido, tanto como para pocos valores como para un grandes volúmenes de valores. 
