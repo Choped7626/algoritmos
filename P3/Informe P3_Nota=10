@@ -1,0 +1,184 @@
+ALGORITMOS PRÁCTICA 3
+
+NOMBRE:
+
+NOMBRE: 
+	
+GRUPO :
+
+FECHA : 03/11/2023
+
+******************************************************************************
+
+INTRODUCCIÓN:
+
+    En esta prática 3 trabajamos con montículos de mínimos de forma que hemos implementado diferentes operaciones para tratar con ellos tales como la operación crearMontículo y la operacion quitarMenor. Hemos usado estas operaciones para la demostración empirica de la complejidad computacional del algoritmo de ordenacion por montículos que ordena los valores de un vector de menor a mayor. 
+
+    Tras haber comprobado su correcto funcionamiento mediante la función test usando vectores ordenados ascendentemente (el mejor caso para un montículo de mínimos) , descendentemente (el peor caso para un montículo de mínimos) y con valores aleatorios.
+
+    Para la realización de la comprobación empírica de la complejidad computacional del algoritmo de ordenacion por montículos hemos medido los tiempos de ejecución con vectores aleatorios , con vectores ordenados ascendentemente y con vectores ordenados descendentemente. También hemos comprobado empíricamente que crear un montículo a partir de un vector cualquiera con n elementos se ejecuta en un tiempo O(n).
+    
+    El dispositivo usado para realizar las mediciones es:
+    Sistema: Ubuntu 22.04.3 LTS
+	Kernel: 6.2.0-35-generic
+	Procesador: 11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz x 4
+
+******************************************************************************
+
+TEST:
+
+        En la función test realizamos la comprobacion del correcto funcionamiento de crearMontículo y de ordenarPorMontículos usando vectores conocidos y imprimiendo el resultado esperado seguido de el resultado de aplicar la función correspondiente al vector.
+
+        Monticulo Ascendente
+    [ 0  1  2  3  4  5  6  7  8  9 ]
+    0 1 2 3 4 5 6 7 8 9 
+    Vector ordenado
+    [ 0  1  2  3  4  5  6  7  8  9 ]
+
+    Monticulo Descendente
+    [ 10  9  8  7  6  5  4  3  2  1 ]
+    1 2 4 3 6 5 8 10 7 9 
+    Vector ordenado
+    [ 1  2  3  4  5  6  7  8  9  10 ]
+
+    Monticulo con vector aleatorio
+    [ -1  -3  -10  -2  -8  -7  4  3  0  -1 ]
+    -10 -8 -7 -2 -3 -1 4 3 0 -1 
+    Vector ordenado
+    [ -10  -8  -7  -3  -2  -1  -1  0  3  4 ]
+
+
+******************************************************************************
+
+MEDICIÓN DE TIEMPOS DE EJECUCIÓN:
+
+	En cuanto a la medición de tiempos de ejecucción, hay que resaltar varios aspectos antes:
+	-La unidad de tiempo empleada son los nanosegundos(μs).
+	-t(n) significa tiempo de que tarda en ejecutar el algoritmo de ordenacion para un vector de tamaño n.
+	-Se sigue una progresion geométrica de razón 2, empezando en n = 500.
+	-Se indicará con (*) los tiempos medidos menores que 500 μs, entonces lo pasamos a un bucle que lo repite 1000 veces y hallamos la media resultante.
+    -Se indicará con # a la derecha del todo de una medición cuando esta sea considerada anómala y por tanto no se tendrá en cuenta a la hora de valorar la complejidad computacional del algoritmo.
+
+******************************************************************************
+
+DEMOSTRACIÓN EMPÍRICA DE QUE LA EJECUCIÓN DE crearMontículo SE EJECUTA EN UN TIEMPO 0(n):
+    
+Crear Monticulo
+                   n                t(n)          t(n)/n^0.8              t(n)/n          t(n)/n^1.2
+(*)                 500          8.08900000          0.05606849          0.01617800          0.00466800     #
+(*)                1000         18.75900000          0.07468092          0.01875900          0.00471205     #
+(*)                2000         31.60000000          0.07225420          0.01580000          0.00345502
+(*)                4000         60.36500000          0.07927518          0.01509125          0.00287285
+(*)                8000        119.12600000          0.08985341          0.01489075          0.00246774
+(*)               16000        238.14800000          0.10316941          0.01488425          0.00214735
+(*)               32000        472.73100000          0.11762350          0.01477284          0.00185539
+                  64000        976.00000000          0.13947804          0.01525000          0.00166738
+                 128000       1829.00000000          0.15012248          0.01428906          0.00136007
+                 256000       3752.00000000          0.17687679          0.01465625          0.00121444
+
+    Tras realizar la medición de la ejecución de crearMontículo con los diferentes tamaños de vectores y , observando los datos de la sucesión de t(n)/n que se encuentran alrededor de 0.0148 , podemos concluir que para cualquier vector , crearMontículo se ejecuta en un tiempo O(n). 
+
+******************************************************************************
+
+TIEMPOS DE EJECUCIÓN ALGORITMO DE ORDENACIÓN POR MONTÍCULOS:
+
+1.-VECTOR ASCENDENTE:
+
+Vector Ascendente
+                   n                t(n)              t(n)/n       t(n)/n*log(n)          t(n)/n^1.5
+(*)                 500         23.58100000          0.04716200          0.00758889          0.00210915     #
+(*)                1000         64.23400000          0.06423400          0.00929882          0.00203126     #
+(*)                2000        155.85800000          0.07792900          0.01025260          0.00174255
+(*)                4000        347.13400000          0.08678350          0.01046334          0.00137217
+                   8000        781.00000000          0.09762500          0.01086268          0.00109148
+                  16000       1645.00000000          0.10281250          0.01062075          0.00081280
+                  32000       3653.00000000          0.11415625          0.01100461          0.00063815
+                  64000       7485.00000000          0.11695313          0.01056808          0.00046230
+                 128000      15471.00000000          0.12086719          0.01027801          0.00033783
+                 256000      33167.00000000          0.12955859          0.01040386          0.00025606
+              
+LEYENDA:
+
+-COTA SUBESTIMADA: n
+-COTA ESTIMADA: O(n*log(n))
+-COTA SOBRESTIMADA: n^1.5
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 500 y n = 1000
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^1.5 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n*log(n)) los valores de la sucesión se mantienen entorno a 0.0105
+
+2.-VECTOR DESCENDENTE:
+
+Vector Descendente
+                   n                t(n)              t(n)/n       t(n)/n*log(n)          t(n)/n^1.5
+(*)                 500         32.83400000          0.06566800          0.01056672          0.00293676
+(*)                1000         78.99600000          0.07899600          0.01143584          0.00249807     #
+(*)                2000        166.40800000          0.08320400          0.01094659          0.00186050
+(*)                4000        362.15400000          0.09053850          0.01091608          0.00143154
+                   8000        749.00000000          0.09362500          0.01041760          0.00104676
+                  16000       1621.00000000          0.10131250          0.01046580          0.00080095
+                  32000       3373.00000000          0.10540625          0.01016112          0.00058924
+                  64000       7450.00000000          0.11640625          0.01051866          0.00046014
+                 128000      15730.00000000          0.12289063          0.01045007          0.00034349
+                 256000      32804.00000000          0.12814063          0.01029000          0.00025326
+
+LEYENDA:
+
+-COTA SUBESTIMADA: n
+-COTA ESTIMADA: O(n*log(n))
+-COTA SOBRESTIMADA: n^1.5
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 1000
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^1.5 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n*log(n)) los valores de la sucesión se mantienen entorno a 0.0104
+
+3.-VECTOR ALEATORIO:
+
+Vector Aleatorio
+                   n                t(n)              t(n)/n       t(n)/n*log(n)          t(n)/n^1.5
+(*)                 500         43.95100000          0.08790200          0.01414442          0.00393110     #
+(*)                1000         93.82100000          0.09382100          0.01358198          0.00296688
+(*)                2000        207.41300000          0.10370650          0.01364397          0.00231895
+(*)                4000        443.42500000          0.11085625          0.01336576          0.00175279
+                   8000        970.00000000          0.12125000          0.01349141          0.00135562
+                  16000       2131.00000000          0.13318750          0.01375855          0.00105294
+                  32000       4508.00000000          0.14087500          0.01358029          0.00078752
+                  64000      10791.00000000          0.16860938          0.01523583          0.00066649     #
+                 128000      20706.00000000          0.16176562          0.01375583          0.00045215
+                 256000      43244.00000000          0.16892187          0.01356483          0.00033386
+LEYENDA:
+
+-COTA SUBESTIMADA: n
+-COTA ESTIMADA: O(n*log(n))
+-COTA SOBRESTIMADA: n^1.5
+
+DATOS ANÓMALOS:
+
+	Consideramos anómalos los datos resultado de la medición con n = 500 y n = 64000
+
+CONCLUSIONES:
+-Podemos observar como la cota subestimada n es correcta pues los valores de la sucesión van aumentando
+-Los valores de la sucesión de la cota n^1.5 se reducen mientras que n aumenta confirmando asi que se trata de una cota sobrestimada
+-Para la cota estimada O(n*log(n)) los valores de la sucesión se mantienen entorno a 0.0135
+
+******************************************************************************
+
+CONCLUSIÓN FINAL:
+    
+    Tras la comprobación empírica del tiempo de ejecución de crearMontículo podemos asegurar completamente que esta función se ejecuta en un tiempo O(n).
+
+    Analizado el algoritmo de ordenación por montículos podemos sacar las siguientes conclusiones respecto a su complejidad:
+        
+    -Independientemente de la ordenación original del vector a ordenar la complejidad computacional del algoritmo es siempre de O(n*log(n))
+    -Incluso los tiempos medidos en cada caso no difieren mucho unos de los otros en las tablas proporcionadas , aún así es conveniente concretar que durante la realización de la pratica nos hemos percatado de que (sobre todo para un n pequeño) la ordenación del vector ascendente es la que tarda menos comparado con el vector descendente y aleatorio , siendo este último el que de media tarda más en su ejecución
+    -Finalmente podemos concluir que el algortimo de ordenación por montículos se comporta de forma muy similar para todos los casos
